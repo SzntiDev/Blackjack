@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blackjack</title>
+  <link rel="stylesheet" href="Estilos.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png">
+  <link rel="manifest" href="img/site.webmanifest">
+</head>
+
+<body>
+
+  <!-- ── Modal de resultado (win/lose/draw) ─────────────── -->
+  <div id="modal-resultado" class="modal-resultado">
+    <div class="modal-contenido" id="modal-contenido">
+      <h1 id="modal-titulo"    class="modal-texto"></h1>
+      <h1 id="modal-descripcion" class="modal-texto"></h1>
+    </div>
+    <div class="modal-acciones">
+      <a href="#" class="button" id="btn-reiniciar"  onclick="reiniciar()"><strong>Reiniciar</strong></a>
+      <a href="#" class="button" id="btn-continuar"  onclick="continuar()"><strong>Continuar</strong></a>
+    </div>
+  </div>
+
+  <!-- ── Tablero principal ──────────────────────────────── -->
+  <div class="tablero" id="tablero">
+
+    <!-- Botón modo oscuro -->
+    <div class="barra-modo">
+      <a href="#" class="btn-circular" id="btn-modo-oscuro" onclick="toggleDarkMode()">a</a>
+    </div>
+
+    <!-- Zona superior: cartas del crupier -->
+    <div class="zona-mesa">
+      <div class="zona-crupier">
+        <div class="mano-crupier" id="mano-crupier">
+          <img class="carta-img" id="carta-oculta"          src="" />
+          <img class="carta-img" id="carta-visible-crupier" src="" />
+        </div>
+      </div>
+      <div class="marcador" id="puntos-crupier">
+        <img src="img/logardo.png" alt="logo" />
+      </div>
+    </div>
+
+    <!-- Barra de acciones (botones de juego) -->
+    <div class="barra-acciones" id="barra-acciones">
+      <a href="#" class="button" id="btn-repartir"  onclick="repar()">          <strong>Repartir</strong>    </a>
+      <a href="#" class="button" id="btn-pedir"     onclick="hit()">            <strong>Pedir Carta</strong> </a>
+      <a href="#" class="button" id="btn-plantarse" onclick="stand()">          <strong>Plantarse</strong>   </a>
+      <a href="#" class="button" id="btn-doblar"    onclick="doblarApuesta()">  <strong>Doblar</strong>      </a>
+      <a href="#" class="button" id="btn-reglas"    onclick="reglas()">         <strong>Reglas</strong>      </a>
+    </div>
+
+    <!-- Zona inferior: panel de apuestas + cartas del jugador -->
+    <div class="zona-mesa">
+
+      <!-- Panel de apuestas (izquierda) -->
+      <div class="panel-info">
+        <div class="info-fila">
+          <div class="info-saldo">
+            <p>Banca:</p>
+            <p id="saldo-display"></p>
+          </div>
+          <div class="info-apuesta">
+            <p>En mesa:</p>
+            <p id="apuesta-display">0 $</p>
+          </div>
+        </div>
+        <div class="panel-fichas" id="panel-fichas">
+          <button class="ficha-btn" onclick="apostar(1)">
+            <img class="ficha" src="img/f1.png"   alt="$1" />
+          </button>
+          <button class="ficha-btn" onclick="apostar(5)">
+            <img class="ficha" src="img/f5.png"   alt="$5" />
+          </button>
+          <button class="ficha-btn" onclick="apostar(25)">
+            <img class="ficha" src="img/f25.png"  alt="$25" />
+          </button>
+          <button class="ficha-btn" onclick="apostar(50)">
+            <img class="ficha" src="img/f50.png"  alt="$50" />
+          </button>
+          <button class="ficha-btn" onclick="apostar(100)">
+            <img class="ficha" src="img/f100.png" alt="$100" />
+          </button>
+          <button class="ficha-btn" onclick="apostar(500)">
+            <img class="ficha" src="img/f500.png" alt="$500" />
+          </button>
+          <div class="fichas-extras">
+            <button class="btn-compacto" onclick="allIn()">All In</button>
+            <button class="btn-compacto" onclick="limpiar()">Limpiar</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cartas del jugador -->
+      <div class="zona-jugador">
+        <div class="mano-jugador" id="mano-jugador">
+          <img class="carta-img" id="carta-jugador-1" src="" />
+          <img class="carta-img" id="carta-jugador-2" src="" />
+        </div>
+      </div>
+
+      <!-- Marcador de puntos del jugador -->
+      <div class="marcador" id="puntos-jugador">
+        <img src="img/logardo.png" alt="logo" />
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- ── Panel de reglas ───────────────────────────────── -->
+  <div class="panel-reglas-fondo" id="panel-reglas">
+    <div class="panel-reglas-contenido">
+      <button id="btn-cerrar-reglas" onclick="reglas()">✖</button>
+      <h2>Reglas del Blackjack</h2>
+      <ul>
+        <li><strong>Objetivo del Juego:</strong> Acercarse lo más posible a 21 puntos sin pasarse.</li>
+        <li><strong>Inicio del Juego:</strong> Realiza una apuesta que no supere tu saldo actual.</li>
+        <li><strong>Reparto de Cartas:</strong> Se reparten dos cartas al jugador y una al crupier (la segunda carta del crupier se mantiene oculta).</li>
+        <br>
+        <li><strong>Valores de las Cartas:</strong>
+          <ul>
+            <li>Cartas del 2 al 10: Valor nominal.</li>
+            <li>J, Q, K: Valen 10 puntos.</li>
+            <li>As: Puede valer 1 u 11 puntos.</li>
+          </ul>
+        </li>
+        <br>
+        <li><strong>Opciones del Jugador:</strong>
+          <ul>
+            <li><strong>Hit:</strong> Solicitar una carta adicional.</li>
+            <li><strong>Doblar:</strong> Duplicar la apuesta, recibes una carta adicional y el crupier empieza a agregar cartas a su mano automáticamente.</li>
+            <li><strong>Stand:</strong> Terminas tu turno y el crupier empieza a agregar cartas a su mano.</li>
+          </ul>
+        </li>
+        <br>
+        <li><strong>Turno del Crupier:</strong> Revelar su carta oculta y seguir sacando cartas hasta alcanzar al menos 17 puntos.</li>
+        <li><strong>Final del Juego:</strong>
+          <ul>
+            <li>Si el jugador supera 21, pierde.</li>
+            <li>Si el crupier supera 21, el jugador gana.</li>
+            <li>El que se acerque más a 21 gana.</li>
+          </ul>
+        </li>
+        <br>
+        <li><strong>Apuestas y Ganancias:</strong>
+          <ul>
+            <li>Ganás: Tu apuesta se multiplica por 2.</li>
+            <li>Perdés: Perdés la cantidad apostada.</li>
+            <li>Empate: Tu apuesta se devuelve.</li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="creditos">
+    <p>Por: Agustin Aurellana y Santiago Pérez</p>
+    <p>5°B Info - 2024</p>
+  </div>
+
+  <script src="programa.js"></script>
+</body>
+
+</html>

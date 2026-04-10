@@ -1,0 +1,91 @@
+============================================================
+  GUÍA DEFINITIVA: BLACKJACK PROFESIONAL (MAZO REAL + UI/UX)
+  Explicación paso a paso del código final - 2024
+============================================================
+
+¡Felicidades! Tenés un juego con lógica de casino profesional. 
+Aquí tenés el desglose total para que entiendas cada engranaje.
+
+------------------------------------------------------------
+1. ARQUITECTURA DEL PROYECTO
+------------------------------------------------------------
+- HTML (Vistas): Define las zonas de la mesa (crupier/jugador), 
+  los botones de acción y los marcadores de puntos.
+- CSS (Aesthetics): Maneja las animaciones de las cartas (caída 
+  y entrada lateral) y el diseño responsivo sin saltos visuales.
+- JS (Lógica): Controla el mazo, los puntos y el dinero.
+
+------------------------------------------------------------
+2. EL MAZO DE CARTAS (Lógica de Casino)
+------------------------------------------------------------
+A diferencia de un juego básico que usa azar puro, este usa un 
+MAZO REAL de 52 cartas únicas.
+
+- crearMazo(): Es un bucle dentro de otro bucle. Recorre los 
+  13 números (1 al K) y los 4 palos (corazón, diamante, trébol, 
+  pica) para generar un array de 52 objetos {numero, palo}.
+- mezclarMazo(): Usa el algoritmo "Fisher-Yates", que es la 
+  forma más eficiente y matemática de barajar un array.
+- sacarCarta(): Es como el "Crupier" que te da la carta de 
+  arriba del mazo. Si no quedan más cartas, automáticamente 
+  abre un mazo nuevo y lo mezcla.
+
+------------------------------------------------------------
+3. LAS VARIABLES DE ESTADO (El Control)
+------------------------------------------------------------
+- enJuego: Es un "semáforo". 
+  * Se pone en ROJO (true) cuando clickeás "Repartir".
+  * Esto bloquea que puedas clickear "Repartir" otra vez 
+    mientras jugás (protección contra spam).
+  * Se pone en VERDE (false) recién cuando la ronda termina.
+- bandera: Se activa si usás el botón "Doblar". Sirve para que 
+  el juego sepa que después de pedirUNA carta extra, debe 
+  terminar el turno automáticamente.
+
+------------------------------------------------------------
+4. FUNCIONES PRINCIPALES
+------------------------------------------------------------
+
+■ repar() - El Inicio de la Mano
+- Activa el bloqueo (enJuego = true).
+- "Saca" 4 cartas del mazo real (2 para vos, 2 para el crupier).
+- Asigna las imágenes: "img/" + n + p + ".png".
+- Dispara animarCartasIniciales(): les pone un delay (retraso) 
+  a cada carta para que caigan una después de la otra (UX fluida).
+
+■ hit() - Pedir Carta
+- Saca una carta nueva del mazo.
+- document.createElement("img"): Crea la etiqueta HTML al vuelo.
+- .classList.add("carta-nueva-jugador"): Le pega la animación 
+  de entrada que definimos en CSS.
+- Suma puntos y chequea si te pasaste de 21.
+
+■ stand() - Turno del Crupier
+- Revela la carta oculta (cambia el src por el real).
+- Lógica de IA del Crupier: Saca cartas MIENTRAS tenga menos de 17. 
+  Es automático y usa el mazo real.
+- Al final, llama a mostrarResultado().
+
+■ mostrarResultado() - El Veredicto
+- Compara tus puntos contra los del crupier.
+- brillarVictoria() / sacudirManoJugador(): Ejecuta el feedback 
+  visual de "ganaste" (brillo dorado) o "perdiste" (vibración).
+- Actualiza el saldo (money) y muestra el Modal animado.
+
+■ limpiarMesa() - El Reset
+- Borra todas las cartas extra del jugador y el crupier del HTML.
+- Vacía los marcadores de puntos.
+- Libera el bloqueo (enJuego = false) para que puedas apostar 
+  y repartir de nuevo.
+
+------------------------------------------------------------
+5. TIPS PARA REPLICARLO (Sin IA)
+------------------------------------------------------------
+1. Siempre hacé que el JS interactúe con el HTML por IDs claros.
+2. Usá clases CSS para las animaciones y activalas con .classList.add().
+3. Para la lógica de puntos, recordá que las figuras (J, Q, K) 
+   valen 10. Podés usar un simple IF: (num > 10) ? 10 : num.
+4. El "As" es lo más difícil: inicialo en 11 y si el puntaje 
+   total se pasa de 21, restale 10 (así pasa a valer 1).
+
+¡Tu código ahora es una base sólida, limpia y profesional!
