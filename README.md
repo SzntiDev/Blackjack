@@ -1,97 +1,137 @@
-<h1 align="center">
-  <br>
-  Blackjack Premium
-  <br>
-</h1>
+# Blackjack
 
-<h4 align="center">A high-fidelity casino experience built with pure web technologies.</h4>
+A professional, high-fidelity Blackjack game built with web technologies, featuring intuitive gameplay and a polished user interface.
 
-<p align="center">
-  <em>Read this in other languages: <a href="README.md">English</a>, <a href="README-es.md">Español</a></em>
-</p>
+## Description
+Blackjack is a web-based implementation of the classic casino card game. It offers a realistic gaming experience with smooth animations, sound effects, and a complete chips management system. The project focuses on clean code architecture and responsive design, providing a seamless experience across different devices.
 
-<p align="center">
-  <a href="#-features">Features</a> •
-  <a href="#-how-it-works">How It Works</a> •
-  <a href="#-installation--usage">Installation & Usage</a> •
-  <a href="#-architecture">Architecture</a> •
-  <a href="#-tech-stack">Tech Stack</a>
-</p>
+## Detailed Overview
+This project was developed to showcase modern front-end capabilities using vanilla JavaScript. It implements the standard rules of Blackjack, where the player aims to reach a hand value of 21 or higher than the dealer without busting. The game includes sophisticated logic for betting, card dealing, and dealer artificial intelligence, all within a visually engaging environment.
 
----
+## Features
+- Complete Blackjack rules (Hit, Stand, Double Down, Split)
+- Realistic chips and betting system
+- Dynamic card animations and sound effects
+- Dealer AI following standard casino rules
+- Responsive UI for desktop and mobile play
+- Session-based score and balance tracking
 
-> [!TIP]
-> **Blackjack Premium** focuses on visual excellence and mathematical accuracy, providing a realistic card-playing experience without the need for heavy frameworks.
+## Technologies Used
+- HTML5
+- CSS3 (Custom styles and animations)
+- Vanilla JavaScript (ES6+)
 
-**Blackjack Premium** is a sleek, highly interactive web implementation of the classic casino game. Developed with a focus on **User Experience (UX)** and **Animation Fidelity**, it features a professional betting system, realistic card shuffling algorithms, and an anti-spam logic that ensures game integrity.
-
-The project showcases advanced DOM manipulation, CSS-led animations (keyframes and transitions), and a robust state machine that handles dealer logic, player decisions, and outcome calculations seamlessly.
-
----
-
-## ✨ Features
-
-- 🃏 **Pro Shuffling Algorithm**: Implements the **Fisher-Yates (Knuth) Shuffle** for a statistically fair and unpredictable 52-card deck distribution.
-- 🎨 **Premium Visuals**: Custom-designed card assets, smooth hover effects, and a sophisticated modal system for game results (Win/Lose/Bust).
-- 💰 **Banking System**: Integrated virtual currency management starting with $1,000. Features dynamic pot handling and balanced payout logic.
-- 🛡️ **Anti-Spam Logic**: A strict state-based control (`enJuego` flag) prevents accidental double-clicks or "re-deal" spamming during active hands.
-- 📱 **Responsive & Lag-Free**: Optimized layout that avoids "content shift" during card reveals, ensuring a stable and immersive UI across all viewports.
-- ✨ **Micro-Animations**: Features score pulsing, hand shaking on loss, and smooth card fly-in transitions for a high-end feel.
-
----
-
-## 🚀 How It Works
-
-Blackjack Premium relies on a structured approach to manage the game flow and the probability engine:
-
-### 1. The Deck Engine
-Instead of simple random number generation, the game maintains a physical `mazo` array. The **Fisher-Yates** shuffle algorithm iterates through the array in reverse, swapping elements to ensure total randomness before every new round.
-
-### 2. Dealer & AI Logic
-The "Crupier" follows standardized casino rules: standing on 17 and hitting on anything lower. This logic is processed asynchronously to allow the user to see the sequential card reveals, simulating a real-life dealer's pace.
-
-### 3. State Management
-The game tracks several concurrent states (Score, Bet, Game Phase). It uses DOM event listeners and CSS class toggling to reflect these states visually—transitioning from "Betting" to "Playing" and "Result" modes dynamically.
-
----
-
-## 💻 Installation & Usage
-
-### Prerequisites
-None. This is a 100% Vanilla frontend project.
-
-### Steps
-1. **Clone the repository**:
+## Installation Instructions
+1. Clone the repository:
    ```bash
    git clone https://github.com/SzntiDev/Blackjack.git
+   ```
+2. Navigate to the project directory:
+   ```bash
    cd Blackjack
    ```
-2. **Play**:
-   Simply open the `index.html` file in any modern web browser.
+3. Open `index.html` in your preferred web browser.
+
+## Usage Examples
+To start playing:
+1. Select your bet amount using the chips.
+2. Click "Deal" to receive your cards.
+3. Choose to "Hit" for another card or "Stand" to keep your current hand.
+4. The dealer will then play their turn according to the rules.
+
+## Project Structure
+- `index.html`: Main game structure and entry point.
+- `programa.js`: Core game logic, including card handling and dealer AI.
+- `Estilos.css`: Styling and animations for the game interface.
+- `img/`: Directory containing card images, chips, and UI assets.
+
+## Configuration
+No additional configuration is required. The game runs entirely in the browser using local resources.
+
+## API Documentation
+Not applicable for this project.
+
+## Screenshots or Examples
+![Blackjack Gameplay](img/fondo.png)
+
+## Roadmap / Future Improvements
+- Multi-hand support
+- Online multiplayer capabilities
+- Advanced statistics and leaderboards
+- Customizable table themes
+
+## Contributing Guidelines
+Contributions are welcome! Please fork the repository and submit a pull request with your proposed changes.
+
+## License
+MIT License
+
+---
+
+# Blackjack (Español)
+
+Un juego de Blackjack profesional de alta fidelidad construido con tecnologías web, con una jugabilidad intuitiva y una interfaz de usuario pulida.
+
+## Descripción
+Blackjack es una implementación web del clásico juego de cartas de casino. Ofrece una experiencia de juego realista con animaciones fluidas, efectos de sonido y un sistema completo de gestión de fichas. El proyecto se centra en una arquitectura de código limpia y un diseño responsivo.
+
+## Resumen Detallado
+Este proyecto fue desarrollado para demostrar las capacidades del front-end moderno utilizando JavaScript puro. Implementa las reglas estándar del Blackjack, donde el objetivo del jugador es alcanzar un valor de mano de 21 o superior al del crupier sin pasarse. El juego incluye lógica sofisticada para apuestas, reparto de cartas e inteligencia artificial del crupier.
+
+## Características
+- Reglas completas de Blackjack (Pedir, Plantarse, Doblar, Dividir)
+- Sistema realista de fichas y apuestas
+- Animaciones dinámicas de cartas y efectos de sonido
+- IA del crupier siguiendo las reglas estándar de los casinos
+- Interfaz responsiva para escritorio y móviles
+- Seguimiento de puntuación y saldo basado en la sesión
+
+## Tecnologías Utilizadas
+- HTML5
+- CSS3 (Estilos y animaciones personalizadas)
+- Vanilla JavaScript (ES6+)
+
+## Instrucciones de Instalación
+1. Clonar el repositorio:
    ```bash
-   start index.html
+   git clone https://github.com/SzntiDev/Blackjack.git
    ```
+2. Navegar al directorio del proyecto:
+   ```bash
+   cd Blackjack
+   ```
+3. Abrir `index.html` en tu navegador web preferido.
 
----
+## Ejemplos de Uso
+Para empezar a jugar:
+1. Selecciona tu monto de apuesta usando las fichas.
+2. Haz clic en "Repartir" para recibir tus cartas.
+3. Elige "Pedir" para otra carta o "Plantarse" para mantener tu mano actual.
+4. El crupier jugará su turno según las reglas.
 
-## 🏗️ Architecture
+## Estructura del Proyecto
+- `index.html`: Estructura principal del juego y punto de entrada.
+- `programa.js`: Lógica central del juego, incluyendo manejo de cartas e IA del crupier.
+- `Estilos.css`: Estilos y animaciones para la interfaz del juego.
+- `img/`: Directorio que contiene imágenes de cartas, fichas y activos de la interfaz.
 
-```text
-Blackjack/
-├── index.html           # Semantic markup and UI containers
-├── Estilos.css          # Premium Design System (Layers, Animations, Variables)
-├── programa.js          # Core engine (State, Shuffling, Dealer AI)
-├── img/                 # SVG and PNG card assets and UI icons
-└── f/                   # Custom Typography and Font assets
-```
+## Configuración
+No se requiere configuración adicional. El juego se ejecuta completamente en el navegador.
 
----
+## Documentación de la API
+No aplicable para este proyecto.
 
-## ⚙️ Tech Stack
+## Capturas de Pantalla o Ejemplos
+![Captura de pantalla del juego](img/fondo.png)
 
-- **[HTML5](https://developer.mozilla.org/en-US/docs/Web/HTML)** for semantic structure.
-- **[CSS3](https://developer.mozilla.org/en-US/docs/Web/CSS)** using Flexbox, Grid, and heavy Keyframe animations.
-- **[Vanilla JavaScript (ES6)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)** for logic, deck management, and DOM interaction.
+## Hoja de Ruta / Mejoras Futuras
+- Soporte para múltiples manos
+- Capacidades de multijugador en línea
+- Estadísticas avanzadas y tablas de clasificación
+- Temas de mesa personalizables
 
----
-> Project co-authored by Agustin Aurellana and Santiago Pérez. Focused on clean logic and premium interface design.
+## Guía para Contribuir
+¡Las contribuciones son bienvenidas! Por favor, haz un fork del repositorio y envía un pull request con los cambios propuestos.
+
+## Licencia
+Licencia MIT
